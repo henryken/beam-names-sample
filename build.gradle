@@ -1,0 +1,59 @@
+buildscript {
+    ext {
+        fastCsvVersion = '1.0.2'
+        googleCloudDataflowJavaSdkVersion = '2.4.0'
+        googleApiClientVersion = '1.22.0'
+        jodaTimeVersion = '2.9.9'
+        kotlinVersion = '1.2.41'
+        kotlinLoggingVersion = '1.5.4'
+        slf4jVersion = '1.7.25'
+
+        junitVersion = '4.12'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+
+plugins {
+    id 'java'
+}
+
+group 'io.suryawirawan.henry.beam'
+version '0.1.0-SNAPSHOT'
+
+apply plugin: 'kotlin'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    compile "com.google.cloud.dataflow:google-cloud-dataflow-java-sdk-all:${googleCloudDataflowJavaSdkVersion}"
+
+    compile("com.google.api-client:google-api-client:${googleApiClientVersion}") {
+        force = true
+    }
+
+    compile "joda-time:joda-time:${jodaTimeVersion}"
+    compile "org.slf4j:slf4j-api:${slf4jVersion}"
+    compile "org.slf4j:slf4j-jdk14:${slf4jVersion}"
+    compile "io.github.microutils:kotlin-logging:$kotlinLoggingVersion"
+    compile "de.siegmar:fastcsv:$fastCsvVersion"
+
+    testCompile "junit:junit:$junitVersion"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = '1.8'
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = '1.8'
+}
